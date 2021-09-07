@@ -13,6 +13,6 @@ type Label struct {
 type JSONWriter struct {
 }
 
-func (w JSONWriter) Write(data app.Currencies) ([]byte, error) {
+func (w JSONWriter) Write(data app.Metrics) ([]byte, error) {
 	return json.Marshal(data)
 }

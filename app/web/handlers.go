@@ -17,7 +17,7 @@ func metricsHandler(w http.ResponseWriter, r *http.Request) {
 		config         interface{}
 		err            error
 		source, format string
-		data           app.Currencies
+		data           app.Metrics
 		result         []byte
 		rd             readers.Readers
 		wr             writers.Writers

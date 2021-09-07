@@ -5,6 +5,6 @@ type Currency struct {
 	Value int    `yaml:"value" json:"value"`
 }
 
-type Currencies struct {
+type Metrics struct {
 	Currencies []Currency `yaml:"currencies" json:"currencies"`
 }

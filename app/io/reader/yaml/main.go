@@ -14,21 +14,21 @@ type YamlConfig struct {
 type Reader struct {
 }
 
-func (y Reader) Read(cfg interface{}) (app.Currencies, error) {
+func (y Reader) Read(cfg interface{}) (app.Metrics, error) {
 	var (
 		config YamlConfig
-		result app.Currencies
+		result app.Metrics
 	)
 
 	config.FilePath = reflect.ValueOf(cfg).FieldByName("FilePath").String()
 
 	yamlFile, err := ioutil.ReadFile(config.FilePath)
 	if err != nil {
-		return app.Currencies{}, err
+		return app.Metrics{}, err
 	}
 	err = yaml.Unmarshal(yamlFile, &result)
 	if err != nil {
-		return app.Currencies{}, err
+		return app.Metrics{}, err
 	}
 
 	return result, nil

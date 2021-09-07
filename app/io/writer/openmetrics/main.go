@@ -15,7 +15,7 @@ type Label struct {
 type OMWriter struct {
 }
 
-func (w OMWriter) Write(data app.Currencies) ([]byte, error) {
+func (w OMWriter) Write(data app.Metrics) ([]byte, error) {
 	var (
 		metricsResponse []string
 	)

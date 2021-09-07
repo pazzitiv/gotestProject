@@ -3,7 +3,7 @@ package writer
 import "gotestProject/app"
 
 type Writer interface {
-	Write(currencies app.Currencies) ([]byte, error)
+	Write(currencies app.Metrics) ([]byte, error)
 }
 
 type Writers struct {
