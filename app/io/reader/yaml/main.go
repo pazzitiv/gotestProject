@@ -4,6 +4,7 @@ import (
 	"gopkg.in/yaml.v2"
 	"gotestProject/app"
 	"io/ioutil"
+	"reflect"
 )
 
 type YamlConfig struct {
@@ -13,12 +14,15 @@ type YamlConfig struct {
 type Reader struct {
 }
 
-func (y Reader) Read(filepath string) (app.Currencies, error) {
+func (y Reader) Read(cfg interface{}) (app.Currencies, error) {
 	var (
+		config YamlConfig
 		result app.Currencies
 	)
 
-	yamlFile, err := ioutil.ReadFile(filepath)
+	config.FilePath = reflect.ValueOf(cfg).FieldByName("FilePath").String()
+
+	yamlFile, err := ioutil.ReadFile(config.FilePath)
 	if err != nil {
 		return app.Currencies{}, err
 	}

@@ -3,7 +3,7 @@ package reader
 import "gotestProject/app"
 
 type Reader interface {
-	Read(string) (app.Currencies, error)
+	Read(interface{}) (app.Currencies, error)
 }
 
 type Readers struct {

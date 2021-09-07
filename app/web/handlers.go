@@ -14,6 +14,7 @@ import (
 
 func metricsHandler(w http.ResponseWriter, r *http.Request) {
 	var (
+		config         interface{}
 		err            error
 		source, format string
 		data           app.Currencies
@@ -30,18 +31,26 @@ func metricsHandler(w http.ResponseWriter, r *http.Request) {
 	source = r.Form.Get("source")
 	format = r.Form.Get("format")
 
+	/**
+	Выбор формата ввода
+	*/
 	switch source {
 	case "yaml":
 		fallthrough
 	default:
+		config = common.App.Readers.Yaml
 		rd.SetReader(yamlreader.Reader{})
 
-		data, err = rd.GetReader().Read(common.App.Readers.Yaml.FilePath)
-		if err != nil {
-			log.Printf("Reader error: %s", err.Error())
-		}
 	}
 
+	data, err = rd.GetReader().Read(config)
+	if err != nil {
+		log.Printf("Reader error: %s", err.Error())
+	}
+
+	/**
+	Выбор формата вывода
+	*/
 	switch format {
 	case "json":
 		wr.SetWriter(jsonreader.JSONWriter{})
