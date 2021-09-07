@@ -46,20 +46,16 @@ func metricsHandler(w http.ResponseWriter, r *http.Request) {
 	case "json":
 		wr.SetWriter(jsonreader.JSONWriter{})
 
-		result, err = wr.GetWriter().Write(data)
-		if err != nil {
-			log.Fatalf("[FATAL] Write error: %s", err.Error())
-		}
-
 	case "openmetrics":
 		fallthrough
 	default:
 		wr.SetWriter(omwriter.OMWriter{})
 
-		result, err = wr.GetWriter().Write(data)
-		if err != nil {
-			log.Fatalf("[FATAL] Write error: %s", err.Error())
-		}
+	}
+
+	result, err = wr.GetWriter().Write(data)
+	if err != nil {
+		log.Fatalf("[FATAL] Write error: %s", err.Error())
 	}
 
 	_, err = w.Write(result)
